@@ -8,7 +8,7 @@
 
 namespace Contagion {
 
-enum class Person { Suceptible, Infectious, Removed, Void };
+enum class Person { Suceptible, Infected, Removed, Void };
 
 class Environment {
  private:
@@ -48,12 +48,12 @@ inline int N_Inf(Environment const& my_env, int r, int c) {
   int counter = 0;
   for (int i : {-1, 0, -1}) {
     for (int j : {-1, 0, 1}) {
-      counter = my_env.condition(r + i, c + j) == Person::Infectious
+      counter = my_env.condition(r + i, c + j) == Person::Infected
                     ? (counter + 1)
                     : counter;
     }
   }
-  if (my_env.condition(r, c) == Person::Infectious) counter += -1;
+  if (my_env.condition(r, c) == Person::Infected) counter += -1;
   return counter;
 }
 
@@ -72,11 +72,11 @@ inline Environment evolve(Environment const& current, double beta, double gamma,
           auto const p_inf = 1 - pow(1 - beta, N_Inf(current, i, j));
           assert(p_inf >= 0 && p_inf <= 1);
           if (dist(gen) <= p_inf) {
-            P0 = Person::Infectious;
+            P0 = Person::Infected;
           }
         } break;
         // the bigger the gamma, the longer the convalescence
-        case Person::Infectious: {
+        case Person::Infected: {
           if (dist(gen) >= gamma) {
             if (dist(gen) >= mi) {
               P0 = Person::Suceptible;
