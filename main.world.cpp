@@ -25,14 +25,14 @@ int main() {
     double constexpr void_percent = 0.02;
     double constexpr def_inf_percent = 0.01;
     double inf_percent;
-    std::cout << "Insert the percentage of infectious people -between (0-1):\n";
+    std::cout << "Insert the percentage of infected people -between (0-1):\n";
     std::cin >> inf_percent;
     if (inf_percent <= 0 || inf_percent >= 1) {
-      std::cout << "Resetting percentage of infectious at 0.01\n";
+      std::cout << "Resetting percentage of infected at 0.01\n";
       inf_percent = def_inf_percent;
     }
     int const n_void = void_percent * (side * side);
-    int n_infetious = inf_percent * (side * side);
+    int n_infected = inf_percent * (side * side);
 
     {
       std::default_random_engine gen{std::random_device{}()};
@@ -47,14 +47,14 @@ int main() {
         env.condition(r, c) = Con::Person::Void;
       }
 
-      for (int i = 0; i != n_infetious; ++i) {
+      for (int i = 0; i != n_infected; ++i) {
         int r = dist(gen);
         int c = dist(gen);
-        for (; env.condition(r, c) == Con::Person::Infectious ||
+        for (; env.condition(r, c) == Con::Person::Infected ||
                env.condition(r, c) == Con::Person::Void;
              r = dist(gen), c = dist(gen))
           ;
-        env.condition(r, c) = Con::Person::Infectious;
+        env.condition(r, c) = Con::Person::Infected;
       }
     }
 
