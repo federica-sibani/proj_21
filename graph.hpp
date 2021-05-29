@@ -165,7 +165,7 @@ class Graph {
             rect.setFillColor(sf::Color::Green);
             break;
 
-          case Person::Infectious:
+          case Person::Infected:
             rect.setFillColor(sf::Color::Red);
             break;
 
