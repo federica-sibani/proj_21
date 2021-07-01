@@ -84,7 +84,7 @@ inline int N_Inf(Environment const& my_env, int r, int c) {
   return counter;
 }
 
-// produce a novel environment according to the state of the previouso one
+// produce a novel environment according to the state of the previous one
 inline Environment evolve(Environment const& current, double beta, double gamma,
                           double mi, std::default_random_engine& gen) {
   int const side = current.side();
